@@ -1,0 +1,25 @@
+<!-- <from (ng-submit)="onSubmit()"> -->
+    <div class="container" >
+        <div class="title">
+            {{ title }}
+            {{ token }}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" type="email" class="validate" [(ngModel)]="model.email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" [(ngModel)]="model.password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <span>{{errorMsg}}</span>
+            <button class="btn waves-effect waves-light" type="button" (click)="postLogin()" name="action">Login</button>            
+            <button class="btn waves-effect waves-light" type="button" (click)="getData()" name="action">CekData</button>
+        </div>
+    </div>
+<!-- </from> -->
