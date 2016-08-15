@@ -22,7 +22,7 @@ import { LoginComponent }  from './components/login/login.component';
   					LoginComponent 
           ],
   providers : [
-            // {provide: XHRBackend, useClass: InMemoryBackendService }
+
           ],
   bootstrap:[ 
   					AppComponent
