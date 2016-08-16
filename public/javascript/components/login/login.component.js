@@ -21,8 +21,6 @@ var LoginComponent = (function () {
             password: ''
         };
     }
-    LoginComponent.prototype.OnInit = function () {
-    };
     LoginComponent.prototype.getData = function () {
         var _this = this;
         return this.loginService.getData(this.apiUrl)
@@ -53,8 +51,9 @@ var LoginComponent = (function () {
     };
     LoginComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'login',
-            templateUrl: './src/components/login/index.html',
+            templateUrl: 'index.html',
             providers: [login_service_1.LoginService]
         }), 
         __metadata('design:paramtypes', [login_service_1.LoginService])

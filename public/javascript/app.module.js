@@ -13,8 +13,7 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var app_routing_1 = require('./app.routing');
-var app_component_1 = require('./components/app/app.component');
-var login_component_1 = require('./components/login/login.component');
+var index_1 = require('./components/index');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,12 +26,13 @@ var AppModule = (function () {
                 http_1.HttpModule
             ],
             declarations: [
-                app_component_1.AppComponent,
-                login_component_1.LoginComponent
+                index_1.AppComponent,
+                index_1.LoginComponent,
+                index_1.MasterSoal
             ],
             providers: [],
             bootstrap: [
-                app_component_1.AppComponent
+                index_1.AppComponent
             ]
         }), 
         __metadata('design:paramtypes', [])

@@ -14,8 +14,9 @@ var MasterSoal = (function () {
     }
     MasterSoal = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'master-soal',
-            templateUrl: './src/components/master/soal/index.html'
+            templateUrl: 'index.html'
         }), 
         __metadata('design:paramtypes', [])
     ], MasterSoal);

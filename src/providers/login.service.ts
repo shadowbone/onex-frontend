@@ -1,14 +1,14 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http , Response ,RequestOptions } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class LoginService 
-{	
+export class LoginService
+{
 
 	private __token : string;
-	constructor(public http : Http) 
+	constructor(private http : Http)
 	{
 		this.__token = localStorage.getItem('id_token');
 	}
@@ -16,11 +16,10 @@ export class LoginService
 	getData(url : string = null)
 	{
 		let jwt = localStorage.getItem('id_token');
-		console.log(jwt);
 		let authHeader = new Headers();
 		if(jwt) {
-    		authHeader.append('Authorization', 'Bearer ' + jwt);     
-  		}	
+    		authHeader.append('Authorization', 'Bearer ' + jwt);
+  		}
 
 		return this.http.get('http://localhost/api.onex/ahay', {headers: authHeader});
 	}
@@ -47,5 +46,5 @@ export class LoginService
 	private handleError(error: any) {
 	    console.error('An error occurred', error);
 	    return Promise.reject(error.message || error);
-  	}	
+  	}
 }

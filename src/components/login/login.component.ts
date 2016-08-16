@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../providers/login.service';
  
 @Component({
+	moduleId: module.id,
   	selector: 'login',
-  	templateUrl : './src/components/login/index.html',
+  	templateUrl : 'index.html',
   	providers : [ LoginService ]
 })
 
@@ -29,10 +30,6 @@ export class LoginComponent
 		};
 	}
 
-	OnInit(){
-
-	}
-
   	getData()
   	{
   		return this.loginService.getData(this.apiUrl)
@@ -46,7 +43,7 @@ export class LoginComponent
 
   	saveJwt(jwt) {
 	    if(jwt) {
-	      localStorage.setItem('id_token', jwt)
+	      localStorage.setItem('id_token', jwt);
 	    }
   	}
 

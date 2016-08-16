@@ -1,8 +1,9 @@
 import { Component , Input, OnInit } from '@angular/core';
 
 @Component({
+	moduleId: module.id,
   	selector: 'master-soal',
-  	templateUrl : './src/components/master/soal/index.html'
+  	templateUrl : 'index.html'
 })
 
 export class MasterSoal

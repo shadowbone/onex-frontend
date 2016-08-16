@@ -9,14 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var Footer_1 = require('../partials/Footer');
+var Header_1 = require('../partials/Header');
 var AppComponent = (function () {
     function AppComponent() {
+        console.log(__dirname);
         this.title = 'Ini Halaman APP';
     }
     AppComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'my-app',
-            templateUrl: './src/components/app/index.html'
+            templateUrl: 'index.html',
+            directives: [Footer_1.Footer, Header_1.Header]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

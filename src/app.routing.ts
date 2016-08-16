@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
-import {AppComponent} from './components/app/app.component';
-import {MasterSoal} from './components/master/soal/MasterSoal';
+
+import { LoginComponent , AppComponent ,MasterSoal } from './components/index';
 
 const appRoutes: Routes = [
   {
@@ -23,7 +22,7 @@ const appRoutes: Routes = [
   {
     path: 'master/soal',
     component : MasterSoal
-  }
+  } 
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

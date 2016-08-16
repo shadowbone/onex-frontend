@@ -19,7 +19,6 @@ var LoginService = (function () {
     LoginService.prototype.getData = function (url) {
         if (url === void 0) { url = null; }
         var jwt = localStorage.getItem('id_token');
-        console.log(jwt);
         var authHeader = new http_1.Headers();
         if (jwt) {
             authHeader.append('Authorization', 'Bearer ' + jwt);
