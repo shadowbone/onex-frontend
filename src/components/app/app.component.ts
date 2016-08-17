@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import {Footer} from '../partials/Footer';
-import {Header} from '../partials/Header';
+import {Footer} from '../partials/footer/Footer';
+import {Header} from '../partials/header/Header';
+import { ENV } from '../../providers/GlobalService';
 
 
 @Component({
@@ -11,10 +12,12 @@ import {Header} from '../partials/Header';
   	directives :[Footer,Header]
 })
 export class AppComponent {
-	title : string;
+	title = 'Tour of Heroes';
+	private dis : any;
+	dataAuth = ENV.auth;
 
 	constructor(){
-		console.log(__dirname);
-		this.title = 'Ini Halaman APP';
+	this.dis = localStorage.getItem('auth');
+		console.log(this.dis);
 	}
 }

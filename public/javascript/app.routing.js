@@ -8,13 +8,6 @@ var appRoutes = [
         pathMatch: 'full'
     },
     {
-        path: 'home',
-        component: index_1.AppComponent,
-        data: {
-            title: 'Heroes List'
-        }
-    },
-    {
         path: 'login',
         component: index_1.LoginComponent
     },
@@ -23,5 +16,6 @@ var appRoutes = [
         component: index_1.MasterSoal
     }
 ];
+exports.appRoutingProviders = [];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
 //# sourceMappingURL=app.routing.js.map
