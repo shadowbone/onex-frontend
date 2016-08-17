@@ -23,7 +23,8 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 app_routing_1.routing,
                 forms_1.FormsModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [
                 index_1.AppComponent,

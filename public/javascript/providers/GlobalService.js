@@ -19,6 +19,11 @@ var GlobalService = (function () {
     return GlobalService;
 }());
 exports.GlobalService = GlobalService;
+/**
+ * [ENV description]
+ * @type {Object}
+ * Desc : Untuk Variable Global
+ */
 exports.ENV = {
     apiUrl: 'http://localhost/api.onex/',
     auth: JSON.parse(localStorage.getItem('auth')),

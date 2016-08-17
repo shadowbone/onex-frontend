@@ -1,7 +1,6 @@
-import { Component,Directive } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component,Directive,Pipe } from '@angular/core';
 import { LoginService } from '../../providers/login.service';
-import { ENV } from '../../providers/GlobalService';
+import { ENV  } from '../../providers/GlobalService';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +9,6 @@ import { Router } from '@angular/router';
   	templateUrl : 'index.html',
   	providers : [ LoginService ]
 })
-
 export class LoginComponent
 { 	
 	hideElement: Boolean = false;
@@ -19,25 +17,18 @@ export class LoginComponent
 	private apiUrl : string;
 	private title : string;
 	private token : string;
-	private model;
-	userForm: any;
+	private error : Object = {};
+	private userForm = {
+		email : '',
+		password : ''
+	};
 
 	constructor(
 		private loginService : LoginService,
-		private router:Router,
-		fb: FormBuilder
+		private router:Router
 		)
 	{
-		this.userForm = fb.group({
-	      email: ["", Validators.required],
-	      password: ["", Validators.required]
-	    });
-
 		this.title = 'OnEx';
-		this.model = {
-			email : '',
-			password : ''
-		};
 	}
 
   	getData()
@@ -65,28 +56,37 @@ export class LoginComponent
   	}
 	postLogin()
 	{		
-		let dataPost = {
-			email: this.model.email,
-			password: this.model. password
+		let data = {
+			email : this.userForm.email,
+			password : this.userForm.password
 		};
 		return this.loginService
-			.postData(ENV.apiUrl + 'auth/login', dataPost)
+			.postData(ENV.apiUrl + 'auth/login', data)
 			.map(response => response.json())
 			.subscribe(
-		        data => {
-		          this.saveJwt(data.token);
-		          this.auth(data.data);
-		          this.model.email = null;
-		          this.model.password = null;
-		          window.location.href = "http://localhost:6969/master/soal";
-		        },
-		        err => this.logError(err.json().message),
-		        () => console.log('Authentication Complete')
-     	 	);
+			    data => {
+			        this.saveJwt(data.token);
+			        this.auth(data.data);
+			        this.status = false;
+			        this.userForm.email = null;
+			        this.userForm.password = null;
+			        // window.location.href = ENV.apiUrl + "master/soal";
+			    },
+			    (err) => this.validation(err.json()),
+			    () => console.log('Authentication Complete')
+	     	);
+	}
+
+	validation(err : any){
+		let dataArray : any =  [];
+		for(let key in err){
+		 	this.error[key] = err[key][0];
+		}
+		return this.error;
 	}
 
 	logError(err) {
-    	console.error('There was an error: ' + err);
+    	console.log(err);
   	}
 
 }
