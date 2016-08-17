@@ -1,9 +1,8 @@
- 
-    <a [routerLink]="['/login']">Login</a>
-	<a [routerLink]="['/master/soal']">Master Soal</a>
-	 <app-header></app-header>  
-  <div class="outer-outlet">
-     <router-outlet></router-outlet>
-  </div>
-  <app-footer></app-footer>
+   
+<p *ngIf="dataAuth && !dataAuth.length > 0">{{ dataAuth.name }}</p>
+    <nav>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/master/soal" routerLinkActive="active">Master Soal</a>
+    </nav>
+    <router-outlet></router-outlet>
 

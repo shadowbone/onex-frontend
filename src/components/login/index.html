@@ -1,8 +1,6 @@
-<!-- <from (ng-submit)="onSubmit()"> -->
-    <div class="container" >
+    <div class="container" [hidden]="hideElement">
         <div class="title">
             {{ title }}
-            {{ token }}
         </div>
         <div class="panel-body">
             <div class="row">
@@ -17,9 +15,6 @@
                         <label for="password">Password</label>
                     </div>
                 </div>
-                <span>{{errorMsg}}</span>
             <button class="btn waves-effect waves-light" type="button" (click)="postLogin()" name="action">Login</button>            
-            <button class="btn waves-effect waves-light" type="button" (click)="getData()" name="action">CekData</button>
         </div>
     </div>
-<!-- </from> -->

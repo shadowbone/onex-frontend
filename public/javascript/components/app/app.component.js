@@ -9,12 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Footer_1 = require('../partials/Footer');
-var Header_1 = require('../partials/Header');
+var Footer_1 = require('../partials/footer/Footer');
+var Header_1 = require('../partials/header/Header');
+var GlobalService_1 = require('../../providers/GlobalService');
 var AppComponent = (function () {
     function AppComponent() {
-        console.log(__dirname);
-        this.title = 'Ini Halaman APP';
+        this.title = 'Tour of Heroes';
+        this.dataAuth = GlobalService_1.ENV.auth;
+        this.dis = localStorage.getItem('auth');
+        console.log(this.dis);
     }
     AppComponent = __decorate([
         core_1.Component({

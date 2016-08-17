@@ -1,29 +1,39 @@
-import { Component , Input, OnInit } from '@angular/core';
+import { Component,Directive } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from '../../providers/login.service';
+import { ENV } from '../../providers/GlobalService';
 import { Router } from '@angular/router';
 
-
-import { LoginService } from '../../providers/login.service';
- 
 @Component({
 	moduleId: module.id,
-  	selector: 'login',
+  	selector: 'my-login',
   	templateUrl : 'index.html',
   	providers : [ LoginService ]
 })
 
 export class LoginComponent
 { 	
+	hideElement: Boolean = false;
 	private data;
 	private status : Boolean = false;
 	private apiUrl : string;
 	private title : string;
 	private token : string;
 	private model;
+	userForm: any;
 
-	constructor(private loginService : LoginService)
+	constructor(
+		private loginService : LoginService,
+		private router:Router,
+		fb: FormBuilder
+		)
 	{
+		this.userForm = fb.group({
+	      email: ["", Validators.required],
+	      password: ["", Validators.required]
+	    });
+
 		this.title = 'OnEx';
-		this.apiUrl = 'http://localhost/api.onex/auth/login';
 		this.model = {
 			email : '',
 			password : ''
@@ -32,7 +42,7 @@ export class LoginComponent
 
   	getData()
   	{
-  		return this.loginService.getData(this.apiUrl)
+  		return this.loginService.getData(ENV.apiUrl + 'ahay')
   				.map(response => response.json()).
   				subscribe(
   					data => this.data = data,
@@ -47,19 +57,28 @@ export class LoginComponent
 	    }
   	}
 
+  	auth(auth){
+  		if(auth){
+  			console.log(auth);
+	      localStorage.setItem('auth', JSON.stringify(auth));
+  		}
+  	}
 	postLogin()
 	{		
-		let dataPost = JSON.stringify({
+		let dataPost = {
 			email: this.model.email,
 			password: this.model. password
-		});
+		};
 		return this.loginService
-			.postData(this.apiUrl, dataPost)
+			.postData(ENV.apiUrl + 'auth/login', dataPost)
+			.map(response => response.json())
 			.subscribe(
 		        data => {
-		          this.saveJwt(data.json().token);
+		          this.saveJwt(data.token);
+		          this.auth(data.data);
 		          this.model.email = null;
 		          this.model.password = null;
+		          window.location.href = "http://localhost:6969/master/soal";
 		        },
 		        err => this.logError(err.json().message),
 		        () => console.log('Authentication Complete')

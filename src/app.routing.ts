@@ -9,13 +9,6 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path : 'home',
-    component : AppComponent,
-    data: {
-      title: 'Heroes List'
-    }
-  },
-  {
     path: 'login',
     component : LoginComponent
   },
@@ -25,4 +18,7 @@ const appRoutes: Routes = [
   } 
 ];
 
+export const appRoutingProviders: any[] = [
+
+];
 export const routing = RouterModule.forRoot(appRoutes);

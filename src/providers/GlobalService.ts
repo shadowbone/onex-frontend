@@ -2,5 +2,11 @@ import { Injectable }    from '@angular/core';
 
 @Injectable()
 export class GlobalService {
-	public apiUrl = 'http://localhost/api.onex/';
+
 }
+
+export const ENV = {
+	apiUrl : 'http://localhost/api.onex/',
+	auth : JSON.parse(localStorage.getItem('auth')),
+	token : localStorage.getItem('token'),
+};

@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var GlobalService = (function () {
     function GlobalService() {
-        this.apiUrl = 'http://localhost/api.onex/';
     }
     GlobalService = __decorate([
         core_1.Injectable(), 
@@ -20,4 +19,9 @@ var GlobalService = (function () {
     return GlobalService;
 }());
 exports.GlobalService = GlobalService;
+exports.ENV = {
+    apiUrl: 'http://localhost/api.onex/',
+    auth: JSON.parse(localStorage.getItem('auth')),
+    token: localStorage.getItem('token'),
+};
 //# sourceMappingURL=GlobalService.js.map
