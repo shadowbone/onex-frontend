@@ -1,21 +1,22 @@
 import { Routes, RouterModule } from '@angular/router';
-
-import { LoginComponent , AppComponent ,MasterSoal } from './components/index';
+import { AuthGuard } from './providers/AuthGuard';
+import { 
+  LoginComponent , 
+  AppComponent ,
+  HomeComponent,
+  MasterSoal,
+  UjianComponent
+} from './components/index';
 
 const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component : LoginComponent
-  },
-  {
-    path: 'master/soal',
-    component : MasterSoal
-  } 
+  { path: '',redirectTo: '/login', pathMatch: 'full'},
+  { path: 'login', component : LoginComponent },
+  { path: 'home', component : HomeComponent, canActivate : [AuthGuard], children : [
+    { path : '' , component : MasterSoal},
+  	{ path : 'master-soal' , component : MasterSoal},
+  	{ path : 'soal', component:UjianComponent} 
+  ] },
+  { path: '**', component: LoginComponent } 
 ];
 
 export const appRoutingProviders: any[] = [

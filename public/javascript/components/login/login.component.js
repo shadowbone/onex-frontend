@@ -10,35 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var login_service_1 = require('../../providers/login.service');
-var GlobalService_1 = require('../../providers/GlobalService');
 var router_1 = require('@angular/router');
 var LoginComponent = (function () {
     function LoginComponent(loginService, router) {
         this.loginService = loginService;
         this.router = router;
         this.hideElement = false;
-        this.status = false;
         this.error = {};
-        this.userForm = {
-            email: '',
-            password: ''
-        };
+        this.userForm = {};
         this.title = 'OnEx';
     }
     LoginComponent.prototype.getData = function () {
         var _this = this;
-        return this.loginService.getData(GlobalService_1.ENV.apiUrl + 'ahay')
+        return this.loginService.getData()
             .map(function (response) { return response.json(); }).
             subscribe(function (data) { return _this.data = data; }, function (error) { return console.error('Error: ' + error); }, function () { return console.log('Completed!'); });
     };
     LoginComponent.prototype.saveJwt = function (jwt) {
         if (jwt) {
             localStorage.setItem('id_token', jwt);
+            var ceh = localStorage.getItem('id_token');
+            console.log(ceh);
+            console.log('Awal');
         }
     };
     LoginComponent.prototype.auth = function (auth) {
         if (auth) {
-            console.log(auth);
             localStorage.setItem('auth', JSON.stringify(auth));
         }
     };
@@ -49,33 +46,29 @@ var LoginComponent = (function () {
             password: this.userForm.password
         };
         return this.loginService
-            .postData(GlobalService_1.ENV.apiUrl + 'auth/login', data)
+            .postData(data)
             .map(function (response) { return response.json(); })
             .subscribe(function (data) {
             _this.saveJwt(data.token);
             _this.auth(data.data);
-            _this.status = false;
             _this.userForm.email = null;
             _this.userForm.password = null;
-            // window.location.href = ENV.apiUrl + "master/soal";
+            _this.router.navigate(['./home']);
         }, function (err) { return _this.validation(err.json()); }, function () { return console.log('Authentication Complete'); });
     };
     LoginComponent.prototype.validation = function (err) {
         var dataArray = [];
+        this.error = {};
         for (var key in err) {
             this.error[key] = err[key][0];
         }
         return this.error;
     };
-    LoginComponent.prototype.logError = function (err) {
-        console.log(err);
-    };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-login',
-            templateUrl: 'index.html',
-            providers: [login_service_1.LoginService]
+            templateUrl: 'index.html'
         }), 
         __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
     ], LoginComponent);

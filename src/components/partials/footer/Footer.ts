@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Inject } from '@angular/core';
 
 @Component({
 	moduleId: module.id,
@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
 	templateUrl: 'footer.html'
 })
 export class Footer  {
-	constructor() {
+	constructor(
+		@Inject('global') private global: string
+		) 
+	{
 
 	}
 }

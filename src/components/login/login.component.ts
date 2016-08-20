@@ -1,27 +1,21 @@
 import { Component,Directive,Pipe } from '@angular/core';
 import { LoginService } from '../../providers/login.service';
-import { ENV  } from '../../providers/GlobalService';
 import { Router } from '@angular/router';
 
 @Component({
 	moduleId: module.id,
   	selector: 'my-login',
-  	templateUrl : 'index.html',
-  	providers : [ LoginService ]
+  	templateUrl : 'index.html'
 })
 export class LoginComponent
 { 	
 	hideElement: Boolean = false;
 	private data;
-	private status : Boolean = false;
 	private apiUrl : string;
 	private title : string;
 	private token : string;
 	private error : Object = {};
-	private userForm = {
-		email : '',
-		password : ''
-	};
+	private userForm : any = {};
 
 	constructor(
 		private loginService : LoginService,
@@ -33,7 +27,7 @@ export class LoginComponent
 
   	getData()
   	{
-  		return this.loginService.getData(ENV.apiUrl + 'ahay')
+  		return this.loginService.getData()
   				.map(response => response.json()).
   				subscribe(
   					data => this.data = data,
@@ -45,12 +39,14 @@ export class LoginComponent
   	saveJwt(jwt) {
 	    if(jwt) {
 	      localStorage.setItem('id_token', jwt);
+	      let ceh = localStorage.getItem('id_token');
+	      	    	console.log(ceh);
+	    	console.log('Awal');
 	    }
   	}
 
   	auth(auth){
   		if(auth){
-  			console.log(auth);
 	      localStorage.setItem('auth', JSON.stringify(auth));
   		}
   	}
@@ -61,16 +57,15 @@ export class LoginComponent
 			password : this.userForm.password
 		};
 		return this.loginService
-			.postData(ENV.apiUrl + 'auth/login', data)
+			.postData(data)
 			.map(response => response.json())
 			.subscribe(
 			    data => {
 			        this.saveJwt(data.token);
 			        this.auth(data.data);
-			        this.status = false;
 			        this.userForm.email = null;
 			        this.userForm.password = null;
-			        // window.location.href = ENV.apiUrl + "master/soal";
+			        this.router.navigate(['./home']);
 			    },
 			    (err) => this.validation(err.json()),
 			    () => console.log('Authentication Complete')
@@ -79,14 +74,10 @@ export class LoginComponent
 
 	validation(err : any){
 		let dataArray : any =  [];
+		this.error = {};
 		for(let key in err){
 		 	this.error[key] = err[key][0];
 		}
 		return this.error;
 	}
-
-	logError(err) {
-    	console.log(err);
-  	}
-
 }

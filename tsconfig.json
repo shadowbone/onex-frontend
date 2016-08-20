@@ -12,6 +12,7 @@
     "outDir" : "public/javascript"
   },
   "filesBlob": [
-    "./public/javascripts/*.ts"
+    "./public/javascripts/*.ts",
+    "./public/javascripts/*.html"
   ]
 }
