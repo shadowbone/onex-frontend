@@ -1,16 +1,16 @@
 import { Injectable,Inject }    from '@angular/core';
 import { Headers, Http,Response } from '@angular/http';
 import {Router} from "@angular/router";
-
 import {Observable, Observer, Subject} from "rxjs/Rx";
 import 'rxjs/add/operator/toPromise';
+import { global }  from './GlobalService';
+
 
 @Injectable()
 export class LoginService
 {
 	constructor(
 		private http : Http,
-		@Inject('global') private global : any,
 		private route : Router
 		)
 	{
@@ -18,41 +18,38 @@ export class LoginService
 	}
 	getData()
 	{
-		// let jwt = this.global.token;
-		let jwt = localStorage.getItem('id_token');
+		let jwt = global.token;
 		let authHeader = new Headers();
 		if(jwt) {
     		authHeader.append('Authorization', 'Bearer ' + jwt);
   		}
-		return this.http.get(this.global.apiUrl + 'ahay', {headers: authHeader});
+		return this.http.get(global.apiUrl + 'ahay', {headers: authHeader});
 	}
 
-	postData(data)
+	postData(url : string = '' , data : any)
 	{
 	    let headers = new Headers();
 	    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 	    headers.append('Content-Type', 'application/json');
 	    return this.http
-	               .post(this.global.apiUrl + 'auth/login', data, {headers: headers});
+	               .post(global.apiUrl + url, data, {headers: headers});
 	}
 
 	logout(){
 		localStorage.clear();
-		this.route.navigate(['/signin']);
+		this.route.navigate(['/login']);
 	}
 
 	isAuth() : Observable<boolean> {
-		var subject = new Subject<boolean>();
-		var jwt = localStorage.getItem('id_token');
-		console.log(jwt);
-		console.log('Akhir');
+		let subject = new Subject<boolean>();
+		let jwt = localStorage.getItem('id_token');
+		let url = 'ahay';
 		if(jwt == null){
-					console.log('token kosong');
 			subject.next(false);
 		} else{
 			let authHeader = new Headers();
 			authHeader.append('Authorization', 'Bearer ' + jwt);
-			this.http.get(this.global.apiUrl + 'ahay',{headers : authHeader})
+			this.http.get(global.apiUrl + url,{headers : authHeader})
 			.map((res : Response) => res.json())
 			.subscribe(res => {
 				subject.next(true);

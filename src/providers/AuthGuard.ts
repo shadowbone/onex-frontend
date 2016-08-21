@@ -10,7 +10,7 @@ export class AuthGuard implements  CanActivate {
 		private router : Router
 		) 
 	{
-		console.log('ahaya');
+
 	}
 
 	canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot) : Observable<boolean> | boolean {
@@ -18,13 +18,10 @@ export class AuthGuard implements  CanActivate {
 		var subject = new Subject<boolean>();
 		Auth.subscribe((res) => {
 			if(!res && state.url !== '/login'){
-			console.log("redirecting to login");
             this.router.navigate(['/login']);
 			}
 			subject.next(res);
-			console.log("redirecting to lss");
 		});
-					console.log("rasda");
 		return subject.asObservable().take(1);
 	}
 }

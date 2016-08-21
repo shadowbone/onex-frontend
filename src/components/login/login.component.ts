@@ -38,16 +38,15 @@ export class LoginComponent
 
   	saveJwt(jwt) {
 	    if(jwt) {
-	      localStorage.setItem('id_token', jwt);
-	      let ceh = localStorage.getItem('id_token');
-	      	    	console.log(ceh);
-	    	console.log('Awal');
+	    	localStorage.removeItem('id_token');
+	      	localStorage.setItem('id_token', jwt);
 	    }
   	}
 
   	auth(auth){
   		if(auth){
-	      localStorage.setItem('auth', JSON.stringify(auth));
+	  		localStorage.removeItem('auth');
+		    localStorage.setItem('auth', JSON.stringify(auth));
   		}
   	}
 	postLogin()
@@ -56,8 +55,9 @@ export class LoginComponent
 			email : this.userForm.email,
 			password : this.userForm.password
 		};
+		let url = 'auth/login';
 		return this.loginService
-			.postData(data)
+			.postData(url,data)
 			.map(response => response.json())
 			.subscribe(
 			    data => {

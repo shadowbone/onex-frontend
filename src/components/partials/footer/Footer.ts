@@ -6,9 +6,7 @@ import { Component,Inject } from '@angular/core';
 	templateUrl: 'footer.html'
 })
 export class Footer  {
-	constructor(
-		@Inject('global') private global: string
-		) 
+	constructor() 
 	{
 
 	}

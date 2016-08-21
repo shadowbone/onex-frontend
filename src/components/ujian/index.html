@@ -1,1 +1,30 @@
-<p>Ini Ujian</p>
+<div class="container" [hidden]="status">
+    <div class="card-panel teal lighten-2">
+        {{ title }}
+    </div>
+  <!-- <md-slide-toggle>Slide Toggle</md-slide-toggle> -->
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="email" [(ngModel)]="input.name" required>
+                <label for="email">Nama Soal</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="password" id="password" [(ngModel)]="input.keterangan" required>
+                <label for="password">Keterangan</label>
+            </div>
+        </div>   
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="password" id="password" [(ngModel)]="input.type" required>
+                <label for="password">Type</label>
+             </div>
+        </div>
+        <button md-raised-button color="primary" (click)="post()">Submit</button>    
+    </div>
+</div>

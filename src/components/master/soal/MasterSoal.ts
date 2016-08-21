@@ -10,6 +10,6 @@ export class MasterSoal
 { 	
 	constructor () 
 	{
-
+		console.log('its Okey');
 	}
 }

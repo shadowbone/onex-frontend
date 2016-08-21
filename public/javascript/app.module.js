@@ -15,9 +15,6 @@ var http_1 = require('@angular/http');
 var card_1 = require('@angular2-material/card');
 var button_1 = require('@angular2-material/button');
 var app_routing_1 = require('./app.routing');
-var GlobalService_1 = require('./providers/GlobalService');
-var AuthGuard_1 = require('./providers/AuthGuard');
-var login_service_1 = require('./providers/login.service');
 var index_1 = require('./components/index');
 var AppModule = (function () {
     function AppModule() {
@@ -41,9 +38,7 @@ var AppModule = (function () {
                 index_1.UjianComponent
             ],
             providers: [
-                login_service_1.LoginService,
-                AuthGuard_1.AuthGuard,
-                { provide: 'global', useValue: GlobalService_1.ENV },
+                app_routing_1.appRoutingProviders
             ],
             bootstrap: [
                 index_1.AppComponent

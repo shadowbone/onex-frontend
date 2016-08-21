@@ -4,12 +4,9 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule, XHRBackend  } from '@angular/http';
 import { MdCardModule } from '@angular2-material/card';
 import { MdButtonModule } from '@angular2-material/button';
-import { routing } from './app.routing';
-import { ENV } from './providers/GlobalService';
+import { routing , appRoutingProviders } from './app.routing';
 import { AuthGuard } from './providers/AuthGuard';
 import { LoginService } from './providers/login.service';
-
-
 
 import { 
   LoginComponent , 
@@ -37,9 +34,7 @@ import {
             UjianComponent
           ],
   providers : [
-            LoginService,
-            AuthGuard,
-            { provide : 'global' , useValue : ENV},
+            appRoutingProviders
           ],
   bootstrap:[ 
   					AppComponent

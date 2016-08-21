@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var MasterSoal = (function () {
     function MasterSoal() {
+        console.log('its Okey');
     }
     MasterSoal = __decorate([
         core_1.Component({

@@ -28,14 +28,13 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.saveJwt = function (jwt) {
         if (jwt) {
+            localStorage.removeItem('id_token');
             localStorage.setItem('id_token', jwt);
-            var ceh = localStorage.getItem('id_token');
-            console.log(ceh);
-            console.log('Awal');
         }
     };
     LoginComponent.prototype.auth = function (auth) {
         if (auth) {
+            localStorage.removeItem('auth');
             localStorage.setItem('auth', JSON.stringify(auth));
         }
     };
@@ -45,8 +44,9 @@ var LoginComponent = (function () {
             email: this.userForm.email,
             password: this.userForm.password
         };
+        var url = 'auth/login';
         return this.loginService
-            .postData(data)
+            .postData(url, data)
             .map(function (response) { return response.json(); })
             .subscribe(function (data) {
             _this.saveJwt(data.token);
